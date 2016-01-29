@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+}
+
+.instructions {
+  display: none;
+}
