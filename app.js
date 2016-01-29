@@ -18,8 +18,11 @@ var playerId = 1;
 var playerPairs = [];
 
 io.on('connection', function(socket){
-  console.log(playerId);
-    socket.emit('connect', playerId);
+  console.log("id", playerId);
+  socket.emit('connectPlayer', playerId);
+  socket.on('getId', function(){
+    io.emit('id', playerId);
+  });
 
     var playerAssigned;
 

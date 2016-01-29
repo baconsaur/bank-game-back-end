@@ -4,10 +4,16 @@ $(function() {
   socket = io();
 
 
-socket.on('connect', function(player_id) {
-  playerId = player_id;
-  console.log(playerId);
+socket.on('connectPlayer', function(msg) {
+  console.log("id", msg);
+  playerId = msg;
 });
+
+socket.emit('getId', "doesn't matter")
+
+socket.on("id", function (msg) {
+  console.log(msg);
+})
 
 socket.on('pair', function(role){
   if (role === 1) {
@@ -18,10 +24,18 @@ socket.on('pair', function(role){
     // generateGame('guide');
   }
 });
+
+
+
+socket.on('chat message', function(message) {
+  $('.chat>ul').append('<li>' + message + '</li>');
 });
-// socket.on('chat message', function(message) {
-//
-// });
+
+$('form').submit(function(event){
+  event.preventDefault();
+  socket.emit('chat message', $('input').val());
+  $('input').val('');
+});
 
 // function generateGame(type) {
 //   var Game = React.createClass({
@@ -55,3 +69,5 @@ socket.on('pair', function(role){
 // function gameLoop() {
 //
 // }
+
+});
