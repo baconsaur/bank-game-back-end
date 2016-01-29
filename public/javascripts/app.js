@@ -9,7 +9,7 @@ socket.on('connect', function(player_id) {
 });
 
 socket.on('pair', function(role){
-  if (role === 1) {
+  if (role == 1) {
     generateGame('safe');
   } else {
     generateGame('guide');
@@ -32,7 +32,7 @@ function generateGame(type) {
   } else {
     $('.guide').css('display', 'block');
   }
-  timer = 20000;
+  timer = 120000;
 
   setInterval(updateTimer, 1000);
 }
@@ -43,7 +43,7 @@ function updateTimer() {
     timer = 0;
     gameOver();
   }
-  $('.timer').text('<span>' + new Date(timeLeft) + '</span>');
+  $('.timer').html('<span>' + new Date(timer) + '</span>');
 }
 
 function gameOver() {
