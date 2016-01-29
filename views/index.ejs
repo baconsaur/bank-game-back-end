@@ -4,11 +4,8 @@
     <meta charset="utf-8">
     <title>Safe Cracker 9000</title>
     <link rel="stylesheet" href="css/app.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.js"></script>
   </head>
   <body>
     <header>
@@ -24,20 +21,26 @@
           As was expected of the legendary bank robbing duo, Bill and Ted, the entry into the bank's vault went exactly as planned. Approaching the door of the safe, Ted checks his watch: 2 more minutes before the alarm is triggered -- no problem, they have the Safe Cracker 9000 on their side!
         </p>
         <p>
-          "Uh, Ted...", Bill's voice comes through the headset. "We have a problem. The Safe Cracker has gone nuts, I'm getting nothing but gibberish!"
+          "Uh, Bill...", Ted's voice comes through the headset. "We have a problem. This safe seems to be from Mars!"
         </p>
         <p>
-          Ted starts to panic, but Bill speaks again. "Wait! I kind of get this... hold on, I think this stuff might mean something..."
+          Ted starts to panic at the strange glyphs all around the dial, but after a few seconds of frantic beeping over the radio, Bill responds. "Wait! The Safe Cracker has a setting for that! Let me try to describe the symbols..."
         </p>
       </section>
       <section class="game" id="game">
+        <div class="safe">
+
+        </div>
+        <div class="guide">
+          
+          <form>
+            <input type="text" id="chat-bar"> <button>Submit</button>
+          </form>
+        </div>
       </section>
       <section class="chat">
         <ul>
         </ul>
-        <form>
-          <input type="text" id="chat-bar"> <button>Submit</button>
-        </form>
       </section>
     </main>
     <footer>
