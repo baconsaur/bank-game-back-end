@@ -16,9 +16,15 @@ socket.on('pair', function(role){
   }
 });
 
-// socket.on('chat message', function(message) {
-//
-// });
+socket.on('chat message', function(message) {
+  $('.chat>ul').append('<li>' + message + '</li>');
+});
+
+$('form').submit(function(event){
+  event.preventDefault();
+  socket.emit($('input').val());
+  $('input').val('');
+});
 
 function generateGame(type) {
   var Game = React.createClass({
