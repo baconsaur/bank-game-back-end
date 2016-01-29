@@ -1,20 +1,30 @@
 var playerId;
 
 $(function() {
-  var socket = io();
+  socket = io();
+
+
+socket.on('connectPlayer', function(msg) {
+  console.log("id", msg);
+  playerId = msg;
 });
 
-socket.on('connect', function(player_id) {
-  playerId = player_id;
-});
+socket.emit('getId', "doesn't matter")
+
+socket.on("id", function (msg) {
+  console.log(msg);
+})
 
 socket.on('pair', function(role){
   if (role == 1) {
     generateGame('safe');
   } else {
+    console.log(role);
     generateGame('guide');
   }
 });
+
+
 
 socket.on('chat message', function(message) {
   $('.chat>ul').append('<li>' + message + '</li>');
@@ -26,6 +36,7 @@ $('form').submit(function(event){
   $('input').val('');
 });
 
+});
 function generateGame(type) {
   if (type === 'safe') {
     $('.safe').css('display', 'block');
