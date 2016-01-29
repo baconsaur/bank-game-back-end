@@ -1,0 +1,28 @@
+{
+  "name": "bank-game-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "babelify": "^7.2.0",
+    "express": "^4.13.4",
+    "socket.io": "^1.4.5",
+    "react-dom": "^0.14.7",
+    "react": "^0.14.7",
+    "babel-preset-react": "^6.3.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamLinehan/bank-game-back-end.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamLinehan/bank-game-back-end/issues"
+  },
+  "homepage": "https://github.com/SamLinehan/bank-game-back-end#readme"
+}
