@@ -14,10 +14,11 @@ app.get('/', function(request, response){
   response.render('index');
 })
 
-var playerId = 0;
+var playerId = 1;
 var playerPairs = [];
 
 io.on('connection', function(socket){
+  console.log(playerId);
     socket.emit('connect', playerId);
 
     var playerAssigned;
@@ -39,14 +40,13 @@ io.on('connection', function(socket){
       playerAssigned = 1;
     }
 
+    console.log(playerAssigned);
     socket.emit('pair', playerAssigned);
 
     playerId++;
-});
 
-// io.on('connection', function(socket){
-//   socket.on('chat message', function(message){
-//     console.log(message);
-//     io.emit('chat message', message);
-//   });
-// });
+    socket.on('chat message', function(message){
+      console.log(message);
+      io.emit('chat message', message);
+    });
+});
