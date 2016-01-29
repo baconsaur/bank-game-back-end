@@ -22,39 +22,32 @@ socket.on('chat message', function(message) {
 
 $('form').submit(function(event){
   event.preventDefault();
-  socket.emit($('input').val());
+  socket.emit('chat message', $('input').val());
   $('input').val('');
 });
 
 function generateGame(type) {
-  var Game = React.createClass({
-    getInitialState: function(){
-      return {player_type: type};
-    },
-    handleChange: function(event) {
+  if (type === 'safe') {
+    $('.safe').css('display', 'block');
+  } else {
+    $('.guide').css('display', 'block');
+  }
+  timer = 20000;
 
-    },
-    render: function() {
-      if (this.state.type === 'safe') {
-        return <div class="safe">
-
-        </div>;
-      } else {
-        return <div class="guide">
-
-        </div>;
-      }
-    }
-  });
-
-  ReactDOM.render(
-    <Game />,
-    document.getElementById('game');
-  );
-
-  gameLoop();
+  setInterval(updateTimer, 1000);
 }
 
-function gameLoop() {
+function updateTimer() {
+  timer -= 1000;
+  if (timer <= 0) {
+    timer = 0;
+    gameOver();
+  }
+  $('.timer').text('<span>' + new Date(timeLeft) + '</span>');
+}
 
+function gameOver() {
+  clearInterval(timer);
+  $('.guide').css('display', 'none');
+  $('.safe').css('display', 'none');
 }
