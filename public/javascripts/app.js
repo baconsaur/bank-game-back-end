@@ -1,45 +1,61 @@
 var playerId;
+var pairId;
 
 $(function() {
   socket = io();
 
 
-socket.on('connectPlayer', function(msg) {
-  console.log("id", msg);
-  playerId = msg;
+  socket.on('connectPlayer', function(msg) {
+    console.log("id", msg);
+    if(!playerId) {
+      playerId = msg;
+    }
+  });
+
+  socket.emit('getId', ' ');
+
+  socket.on("id", function (msg) {
+  });
+
+  socket.on('start game', function(pairObject){
+    pairObject = JSON.parse(pairObject);
+    if(!pairId) {
+      var type;
+      if (pairObject.player1 === playerId) {
+        type = 'safe';
+      } else if (pairObject.player1 === playerId) {
+        type = 'guide';
+      } else {
+        return;
+      }
+      pairId = pairObject.gameObject.pairId;
+      console.log(pairId);
+      generateGame(type);
+    }
+  });
+
+  socket.on('chat message', function(message) {
+    $('.chat>ul').append('<li>' + message + '</li>');
+  });
+
+  $('form').submit(function(event){
+    event.preventDefault();
+    socket.emit('chat message', $('input').val());
+    $('input').val('');
+  });
+
 });
 
-socket.emit('getId', "doesn't matter")
-
-socket.on("id", function (msg) {
-  console.log(msg);
-})
-
-socket.on('pair', function(role){
-  if (role == 1) {
-    generateGame('safe');
-  } else {
-    console.log(role);
-    generateGame('guide');
-  }
-});
-
-
-
-socket.on('chat message', function(message) {
-  $('.chat>ul').append('<li>' + message + '</li>');
-});
-
-$('form').submit(function(event){
-  event.preventDefault();
-  socket.emit('chat message', $('input').val());
-  $('input').val('');
-});
-
-});
 function generateGame(type) {
   if (type === 'safe') {
     $('.safe').css('display', 'block');
+    var $symbols = $('.safe > .symbol');
+    for (var i in $symbols) {
+      $symbols[i].attr('id', i).css('background-image', 'images/' + i + '.png');
+    }
+    $symbols.click(function(event){
+      socket.emit('symbol select', {pair: pairId, target: event.target.id});
+    });
   } else {
     $('.guide').css('display', 'block');
   }

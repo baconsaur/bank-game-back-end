@@ -28,7 +28,7 @@ main {
 }
 
 .safe {
-  /*display: none;*/
+  display: none;
   margin-top: 30px;
   width: 100%;
 }
