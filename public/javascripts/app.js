@@ -16,9 +16,9 @@ socket.on('pair', function(role){
   }
 });
 
-socket.on('chat message', function(message) {
-
-});
+// socket.on('chat message', function(message) {
+//
+// });
 
 function generateGame(type) {
   var Game = React.createClass({
