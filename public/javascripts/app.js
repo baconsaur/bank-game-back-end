@@ -17,7 +17,6 @@ socket.on("id", function (msg) {
 
 socket.on('pair', function(role){
   if (role == 1) {
-    console.log(role);
     generateGame('safe');
   } else {
     console.log(role);
@@ -44,7 +43,7 @@ function generateGame(type) {
   } else {
     $('.guide').css('display', 'block');
   }
-  timer = 20000;
+  timer = 120000;
 
   setInterval(updateTimer, 1000);
 }
@@ -55,7 +54,7 @@ function updateTimer() {
     timer = 0;
     gameOver();
   }
-  $('.timer').text('<span>' + new Date(timer) + '</span>');
+  $('.timer').html('<span>' + new Date(timer) + '</span>');
 }
 
 function gameOver() {
