@@ -16,12 +16,12 @@ socket.on("id", function (msg) {
 })
 
 socket.on('pair', function(role){
-  if (role === 1) {
+  if (role == 1) {
     console.log(role);
-    // generateGame('safe');
+    generateGame('safe');
   } else {
     console.log(role);
-    // generateGame('guide');
+    generateGame('guide');
   }
 });
 
@@ -37,37 +37,29 @@ $('form').submit(function(event){
   $('input').val('');
 });
 
-// function generateGame(type) {
-//   var Game = React.createClass({
-//     getInitialState: function(){
-//       return {player_type: type};
-//     },
-//     handleChange: function(event) {
-//
-//     },
-//     render: function() {
-//       if (this.state.type === 'safe') {
-//         return <div class="safe">
-//
-//         </div>;
-//       } else {
-//         return <div class="guide">
-//
-//         </div>;
-//       }
-//     }
-//   });
-//
-//   ReactDOM.render(
-//     <Game />,
-//     document.getElementById('game');
-//   );
-//
-//   gameLoop();
-// }
-//
-// function gameLoop() {
-//
-// }
-
 });
+function generateGame(type) {
+  if (type === 'safe') {
+    $('.safe').css('display', 'block');
+  } else {
+    $('.guide').css('display', 'block');
+  }
+  timer = 20000;
+
+  setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+  timer -= 1000;
+  if (timer <= 0) {
+    timer = 0;
+    gameOver();
+  }
+  $('.timer').text('<span>' + new Date(timer) + '</span>');
+}
+
+function gameOver() {
+  clearInterval(timer);
+  $('.guide').css('display', 'none');
+  $('.safe').css('display', 'none');
+}

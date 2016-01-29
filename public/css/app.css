@@ -21,3 +21,11 @@ main {
 .instructions {
   display: none;
 }
+
+.safe {
+  display: none;
+}
+
+.guide {
+  display: none;
+}
